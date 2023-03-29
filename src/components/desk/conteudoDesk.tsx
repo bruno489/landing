@@ -77,7 +77,7 @@ export const ConteudoDesk = () => {
           style={{ padding: "10px auto", flex: "1" }}
         >
           <Col style={{ width: "30%" }}>
-            <div style={{ height: "50vw", display: "flex", margin: "auto 0" }}>
+            <div style={{ height: "70vh", display: "flex", margin: "auto 0" }}>
               <Image src={AvatarCorpo} />
             </div>
           </Col>
