@@ -6,44 +6,45 @@ import {
   Menu,
   Row,
   Timeline,
-  Typography,
-} from "antd";
-import AvatarRosto from "../../../src/images/avatar_face.png";
-import AvatarCorpo from "../../../src/images/avatar_corpo.png";
-import Image from "next/image";
-import { FooterLanding, HeaderLanding } from "../layout";
+  Typography
+} from 'antd'
+import AvatarRosto from '../../../src/images/avatar_face.png'
+import AvatarCorpo from '../../../src/images/avatar_corpo.png'
+import Image from 'next/image'
+import { FooterLanding, HeaderLanding } from '../layout'
 
-const { Content } = Layout;
-const { Title, Text } = Typography;
+const { Content } = Layout
+const { Title, Text } = Typography
 
 export const ConteudoDesk = () => {
   const styleCarousel = {
-    margin: "0",
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79",
-  };
+    margin: '0',
+    height: '160px',
+    color: '#fff',
+    lineHeight: '160px',
+    textAlign: 'center',
+    background: '#364d79'
+  }
   return (
     <Layout>
       <HeaderLanding>
-        <div style={{ width: "200px", display: "flex" }}>
-          <div style={{ width: "50px" }}>
+        <div style={{ width: '200px', display: 'flex' }}>
+          <div style={{ width: '50px' }}>
             <Image src={AvatarRosto} />
           </div>
           <div
             style={{
-              textAlign: "center",
-              width: "110px",
+              textAlign: 'center',
+              width: '110px',
+              padding: 'auto'
             }}
           >
             <Title
               style={{
-                color: "white",
-                margin: "0",
-                display: "flex",
-                justifyContent: "center",
+                color: 'white',
+                margin: '0px',
+                display: 'flex',
+                justifyContent: 'center'
                 // border:'1px solid green',
                 // alignItems:'center'
               }}
@@ -53,8 +54,8 @@ export const ConteudoDesk = () => {
             </Title>
             <Title
               style={{
-                color: "white",
-                margin: "0",
+                color: 'white',
+                margin: '0px'
                 // border:'1px solid green'
               }}
               level={5}
@@ -63,29 +64,33 @@ export const ConteudoDesk = () => {
             </Title>
           </div>
         </div>
-        <Menu mode="horizontal" theme="dark">
-          <Menu.Item key={1}>Quem sou</Menu.Item>
-          <Menu.Item key={2}>Stack</Menu.Item>
-          <Menu.Item key={3}>Experiência</Menu.Item>
-        </Menu>
+        <Menu
+          mode="horizontal"
+          theme="dark"
+          items={[
+            { key: 1, label: 'Quem sou' },
+            { key: 2, label: 'Stack' },
+            { key: 3, label: 'Experiência' }
+          ]}
+        ></Menu>
       </HeaderLanding>
-      <Content style={{ width: "100%" }}>
+      <Content style={{ width: '100%' }}>
         <Divider>Quem sou</Divider>
         <Row
           justify="center"
           align="middle"
-          style={{ padding: "10px auto", flex: "1" }}
+          style={{ padding: '10px auto', flex: '1' }}
         >
-          <Col style={{ width: "30%" }}>
-            <div style={{ height: "70vh", display: "flex", margin: "auto 0" }}>
+          <Col style={{ width: '30%' }}>
+            <div style={{ height: '70vh', display: 'flex', margin: 'auto 0' }}>
               <Image src={AvatarCorpo} />
             </div>
           </Col>
           <Col
-            style={{ flexDirection: "column", width: "40%", display: "flex" }}
+            style={{ flexDirection: 'column', width: '40%', display: 'flex' }}
           >
             <div>
-              {" "}
+              {' '}
               <Title level={3}>Permita que eu me apresente:</Title>
             </div>
             <div>
@@ -101,7 +106,7 @@ export const ConteudoDesk = () => {
           </Col>
         </Row>
         <Divider>Stack</Divider>
-        <div style={{ justifyContent: "center", display: "flex" }}>
+        <div style={{ justifyContent: 'center', display: 'flex' }}>
           <Timeline>
             <Timeline.Item>item 1</Timeline.Item>
             <Timeline.Item>item 2</Timeline.Item>
@@ -112,5 +117,5 @@ export const ConteudoDesk = () => {
         <Text>Desenvolvido por Bruno Guedes</Text>
       </FooterLanding>
     </Layout>
-  );
-};
+  )
+}
