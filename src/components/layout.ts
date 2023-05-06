@@ -5,11 +5,11 @@ const {Header, Footer} = Layout
 
 export const HeaderLanding = styled(Header)`
 display: flex;
-justify-content: space-between;
+justify-content: center;
 color: white;
 padding: 0 15px;
 
-.menu{
+div > .menu{
   width: 300px;
   height: 98%;
 
@@ -18,7 +18,7 @@ padding: 0 15px;
   }
 }
 
-.title{
+div > .title{
   align-items: center;
   width: 160px;
 
