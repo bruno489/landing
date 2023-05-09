@@ -10,6 +10,12 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat';
     src: url('/fonts/Montserrat.ttf')
   }
+  .ant-btn{
+   margin-top: 10px;
+   @media (max-width: 600px) {
+      width: 100%;
+   }
+  }
 
 `;
 

@@ -14,16 +14,17 @@ export default async function sendMail(
     const { name, email, phone, message } = req.body
 
     const transporter = nodemailer.createTransport({
-      host: 'smtp.umbler.com',
-      port: 587,
-      secure: true,
+      host: 'smtp.mailtrap.io',
+      // host: 'smtp.umbler.com',
+      port: 2525,
+      // secure: true,
       auth: {
-        user: process.env.AUTH_MAIL,
-        pass: process.env.PASS_MAIL,
+        user: 'dd77b0a47a3f07',
+        pass: '52e2aba456e0c6',
       },
-      tls: {
-        ciphers: 'SSLv3',
-      },
+      // tls: {
+      //   ciphers: 'SSLv3',
+      // },
     })
 
     await new Promise((resolve, reject) => {
@@ -40,7 +41,7 @@ export default async function sendMail(
     })
 
     const mailOptions = {
-      from: 'bguedes563@coopteam.com.br',
+      from: 'brunoguedes@landing.com',
       to: 'bguedes563@gmail.com',
       subject: `[CONTATO PELO SITE] - ${name}`,
       text: `Cliente: ${name}

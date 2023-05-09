@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {Layout} from 'antd'
+import {Layout, Card as CardAntD} from 'antd'
 
 const {Header, Footer} = Layout
 
@@ -30,4 +30,22 @@ div > .title{
 
 export const FooterLanding = styled(Footer)`
 text-align: center !important;
+`
+
+export const Card = styled(CardAntD)`
+&:hover{
+  box-shadow: 5px 5px 10px;
+  cursor: pointer;
+}
+`
+
+export const RowToColumn = styled.div`
+  display: flex;
+  justify-Content: center;
+  align-Items: center;
+  gap: 20px;
+
+  @media (max-width: 600px) {
+    flex-Direction: column;
+  }
 `
