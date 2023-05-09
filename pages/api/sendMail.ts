@@ -19,8 +19,8 @@ export default async function sendMail(
       port: 2525,
       // secure: true,
       auth: {
-        user: 'dd77b0a47a3f07',
-        pass: '52e2aba456e0c6',
+        user: process.env.USER_CREDENCIAL,
+        pass: process.env.PASSWORD_CREDENCIAL,
       },
       // tls: {
       //   ciphers: 'SSLv3',
