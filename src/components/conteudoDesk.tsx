@@ -1,10 +1,11 @@
 import {
+  Card,
   Col,
-  Descriptions,
   Divider,
   Layout,
   Menu,
   Row,
+  Tabs,
   Timeline,
   Typography
 } from 'antd'
@@ -13,6 +14,12 @@ import AvatarCorpo from '../../src/images/avatar_corpo.png'
 import Image from 'next/image'
 import { FooterLanding, HeaderLanding } from './layout'
 import moment from 'moment'
+import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
+import {
+  GithubOutlined,
+  LinkedinOutlined,
+  WhatsAppOutlined
+} from '@ant-design/icons'
 
 const { Content } = Layout
 const { Title, Text } = Typography
@@ -31,7 +38,13 @@ interface Empresas {
   stacksUsadas: string[]
 }
 
+const { TabPane } = Tabs
+const { Meta } = Card
+
 export const ConteudoDesk = () => {
+  const { promiseInProgress: sendEmailPromise } = usePromiseTracker({
+    area: 'submitEmail'
+  })
   const stacks: Stacks = {
     front: [
       'Javascript',
@@ -75,6 +88,27 @@ export const ConteudoDesk = () => {
       ]
     }
   ]
+
+  const sendContact = async (contactData: any) => {
+    await trackPromise(
+      fetch(`/api/sendMail/`, {
+        method: 'POST',
+        body: JSON.stringify(contactData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }),
+      'sendMail'
+    )
+      .then(res => {
+        // openSuccessNotification()
+        console.log(res)
+        return res
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
 
   return (
     <Layout>
@@ -189,7 +223,7 @@ export const ConteudoDesk = () => {
               Front-end
             </Divider>
             <Timeline>
-              {stacks.front.map((stack, idx) => (
+              {stacks.front.map(stack => (
                 <Timeline.Item>{stack}</Timeline.Item>
               ))}
             </Timeline>
@@ -204,7 +238,7 @@ export const ConteudoDesk = () => {
               Back-end
             </Divider>
             <Timeline>
-              {stacks.back.map((stack, idx) => (
+              {stacks.back.map(stack => (
                 <Timeline.Item>{stack}</Timeline.Item>
               ))}
             </Timeline>
@@ -248,6 +282,85 @@ export const ConteudoDesk = () => {
               </div>
             </div>
           ))}
+        </div>
+        <Divider>Contatos</Divider>
+        <div style={{ padding: '0 20px', marginBottom: '20px' }}>
+          <Tabs defaultActiveKey="1" centered>
+            <TabPane key="1" tab="E-mail">
+              E-mail
+            </TabPane>
+            <TabPane key="2" tab="Redes sociais">
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  // flexDirection: 'column',
+                  gap: '20px'
+                }}
+              >
+                <Card
+                  style={{ width: 300 }}
+                  cover={
+                    <WhatsAppOutlined
+                      style={{
+                        fontSize: '200px',
+                        color: '#25D366',
+                        marginTop: '20px'
+                      }}
+                    />
+                  }
+                >
+                  <Meta
+                    title="WhatsApp"
+                    style={{
+                      justifyContent: 'center',
+                      display: 'flex'
+                    }}
+                  />
+                </Card>
+                <Card
+                  style={{ width: 300 }}
+                  cover={
+                    <LinkedinOutlined
+                      style={{
+                        fontSize: '200px',
+                        color: '#0a66c2',
+                        marginTop: '20px'
+                      }}
+                    />
+                  }
+                >
+                  <Meta
+                    title="LinkedIn"
+                    style={{
+                      justifyContent: 'center',
+                      display: 'flex'
+                    }}
+                  />
+                </Card>
+                <Card
+                  style={{ width: 300 }}
+                  cover={
+                    <GithubOutlined
+                      style={{
+                        fontSize: '200px',
+                        marginTop: '20px'
+                      }}
+                    />
+                  }
+                >
+                  <Meta
+                    title="GitHub"
+                    style={{
+                      justifyContent: 'center',
+                      display: 'flex'
+                    }}
+                  />
+                </Card>
+              </div>
+            </TabPane>
+          </Tabs>
         </div>
       </Content>
       <FooterLanding>
