@@ -9,7 +9,8 @@ import {
   Row,
   Tabs,
   Timeline,
-  Typography
+  Typography,
+  notification
 } from 'antd'
 import AvatarRosto from '../../src/images/avatar_face.png'
 import AvatarCorpo from '../../src/images/avatar_corpo.png'
@@ -94,6 +95,18 @@ export const ConteudoDesk = () => {
     }
   ]
 
+  const openSuccessNotification = () => {
+    notification.config({
+      bottom: 50,
+      duration: 10
+    })
+    notification.success({
+      message: 'Mensagem enviada',
+      description:
+        'Sua mensagem foi enviada com sucesso. Em breve estarei retornando o contato.'
+    })
+  }
+
   const sendContact = async (contactData: any) => {
     await trackPromise(
       fetch(`/api/sendMail/`, {
@@ -106,8 +119,9 @@ export const ConteudoDesk = () => {
       'submitEmail'
     )
       .then(res => {
-        // openSuccessNotification()
+        openSuccessNotification()
         console.log(res)
+        formRegisterContact.resetFields()
         return res
       })
       .catch(error => {
