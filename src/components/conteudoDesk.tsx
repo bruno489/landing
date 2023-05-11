@@ -1,21 +1,19 @@
+import React from 'react'
 import {
   Button,
   Col,
   Divider,
   Form,
   Input,
-  Layout,
-  Menu,
   Row,
   Tabs,
   Timeline,
   Typography,
   notification
 } from 'antd'
-import AvatarRosto from '../../src/images/avatar_face.png'
 import AvatarCorpo from '../../src/images/avatar_corpo.png'
 import Image from 'next/image'
-import { Card, FooterLanding, HeaderLanding, RowToColumn } from './layout'
+import { Card, RowToColumn } from './layout'
 import moment from 'moment'
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker'
 import {
@@ -24,10 +22,9 @@ import {
   WhatsAppOutlined
 } from '@ant-design/icons'
 import { MaskedInput } from 'antd-mask-input'
-import Link from 'next/link'
+import { GetServerSideProps } from 'next'
 
-const { Content } = Layout
-const { Title, Text } = Typography
+const { Title } = Typography
 
 interface Stacks {
   front: Array<string>
@@ -47,15 +44,13 @@ const { TabPane } = Tabs
 const { Meta } = Card
 const { TextArea } = Input
 
-interface Props {
-  whatsapp: string
-}
-
-export const ConteudoDesk = ({ whatsapp }: Props) => {
+export const ConteudoDesk = (): JSX.Element => {
   const [formRegisterContact] = Form.useForm()
   const { promiseInProgress: sendEmailPromise } = usePromiseTracker({
     area: 'submitEmail'
   })
+
+  console.log('props', process.env.WHATSAPP_NUMBER)
 
   const stacks: Stacks = {
     front: [
@@ -136,103 +131,36 @@ export const ConteudoDesk = ({ whatsapp }: Props) => {
   }
 
   return (
-    <Layout>
-      <HeaderLanding>
-        <div
-          style={{
-            maxWidth: '1100px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            flex: '1'
-          }}
-        >
-          <div className="title" style={{ display: 'flex', height: '60px' }}>
-            <div
-              style={{
-                width: '50px',
-                alignItems: 'center',
-                height: '60px'
-              }}
-            >
-              <Image src={AvatarRosto} />
-            </div>
-            <div
-              style={{
-                textAlign: 'center',
-                width: '110px',
-                padding: 'auto',
-                height: '50px'
-              }}
-            >
-              <Title
-                style={{
-                  color: 'white',
-                  margin: '0px'
-                }}
-                level={5}
-              >
-                Bruno Guedes
-              </Title>
-              <Title
-                style={{
-                  color: 'white',
-                  margin: '0px'
-                }}
-                level={5}
-              >
-                Developer
-              </Title>
-            </div>
-          </div>
-          <div className="menu">
-            <Menu mode="horizontal" className="menu" theme="dark">
-              <Menu.Item key={1}>
-                <Link href="#quemSou">Quem sou</Link>
-              </Menu.Item>
-              <Menu.Item key={2}>
-                <Link href="#stack">Stack</Link>
-              </Menu.Item>
-              <Menu.Item key={3}>
-                <Link href="#experiencias">Experiências</Link>
-              </Menu.Item>
-              <Menu.Item key={4}>
-                <Link href="#experiencias">Contatos</Link>
-              </Menu.Item>
-            </Menu>
-          </div>
-        </div>
-      </HeaderLanding>
-      <Content style={{ maxWidth: '1400px', margin: '0 auto' }}>
+    <>
+      <Row
+        justify="center"
+        align="middle"
+        style={{ padding: '10px auto', flex: '1' }}
+        id="quemSou"
+      >
         <Divider>Quem sou</Divider>
-        <Row
-          justify="center"
-          align="middle"
-          style={{ padding: '10px auto', flex: '1' }}
-          id="quemSou"
-        >
-          <Col style={{ width: '30%' }}>
-            <div style={{ height: '70vh', display: 'flex', margin: 'auto 0' }}>
-              <Image src={AvatarCorpo} />
-            </div>
-          </Col>
-          <Col
-            style={{ flexDirection: 'column', width: '40%', display: 'flex' }}
-          >
-            <div>
-              <Title level={3}>Permita que eu me apresente:</Title>
-            </div>
-            <div>
-              <p>
-                Olá, me chamo Bruno Guedes e sou desenvolvedor fullstack há mais
-                de um ano e meio.
-              </p>
-              <p>
-                Graduando em Direito, autodidata e apaixonado pela programação
-                com o hábito de aprender todo dia.
-              </p>
-            </div>
-          </Col>
-        </Row>
+        <Col style={{ width: '30%' }}>
+          <div style={{ height: '70vh', display: 'flex', margin: 'auto 0' }}>
+            <Image src={AvatarCorpo} />
+          </div>
+        </Col>
+        <Col style={{ flexDirection: 'column', width: '40%', display: 'flex' }}>
+          <div>
+            <Title level={3}>Permita que eu me apresente:</Title>
+          </div>
+          <div>
+            <p>
+              Olá, me chamo Bruno Guedes e sou desenvolvedor fullstack há mais
+              de um ano e meio.
+            </p>
+            <p>
+              Graduando em Direito, autodidata e apaixonado pela programação com
+              o hábito de aprender todo dia.
+            </p>
+          </div>
+        </Col>
+      </Row>
+      <div id="stack">
         <Divider>Stack</Divider>
         <div
           style={{
@@ -274,207 +202,210 @@ export const ConteudoDesk = ({ whatsapp }: Props) => {
             </Timeline>
           </div>
         </div>
+      </div>
+
+      <div style={{ padding: '0 20px' }} id="experiencias">
         <Divider>Experiências</Divider>
-        <div style={{ padding: '0 20px' }} id="experiencias">
-          {empresas.map((empresa, idx) => (
-            <div
-              key={idx}
-              style={{
-                border: '1px solid #001529',
-                margin: '5px 00px',
-                padding: '5px 10px'
-              }}
-            >
-              <div>
-                <strong>Empresa:</strong>
-                <span> {empresa.nomeEmpresa}</span>
-              </div>
-              <div>
-                <strong>Cargo:</strong>
-                <span> {empresa.cargo}</span>
-              </div>
-              <div>
-                <strong>Periodo:</strong>{' '}
-                <span>{moment(empresa.dataInicio).format('MM/YYYY ')}</span> -{' '}
-                <span>{moment(empresa.dataFinal).format('MM/YYYY')}</span>
-              </div>
-              <div>
-                <strong>Stacks mais usadas:</strong>{' '}
-                <span>
-                  {empresa.stacksUsadas?.map((stack, idx) => (
-                    <>
-                      {idx !== empresa.stacksUsadas.length - 1
-                        ? `${stack}, `
-                        : `${stack}.`}
-                    </>
-                  ))}
-                </span>
-              </div>
+        {empresas.map((empresa, idx) => (
+          <div
+            key={idx}
+            style={{
+              border: '1px solid #001529',
+              margin: '5px 00px',
+              padding: '5px 10px'
+            }}
+          >
+            <div>
+              <strong>Empresa:</strong>
+              <span> {empresa.nomeEmpresa}</span>
             </div>
-          ))}
-        </div>
+            <div>
+              <strong>Cargo:</strong>
+              <span> {empresa.cargo}</span>
+            </div>
+            <div>
+              <strong>Periodo:</strong>{' '}
+              <span>{moment(empresa.dataInicio).format('MM/YYYY ')}</span> -{' '}
+              <span>{moment(empresa.dataFinal).format('MM/YYYY')}</span>
+            </div>
+            <div>
+              <strong>Stacks mais usadas:</strong>{' '}
+              <span>
+                {empresa.stacksUsadas?.map((stack, idx) => (
+                  <>
+                    {idx !== empresa.stacksUsadas.length - 1
+                      ? `${stack}, `
+                      : `${stack}.`}
+                  </>
+                ))}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ padding: '0 20px', marginBottom: '20px' }} id="contatos">
         <Divider>Contatos</Divider>
-        <div style={{ padding: '0 20px', marginBottom: '20px' }} id="contatos">
-          <Tabs defaultActiveKey="1" centered>
-            <TabPane key="1" tab="E-mail">
-              <Form
-                form={formRegisterContact}
-                name="formRegisterContact"
-                onFinish={sendContact}
-                scrollToFirstError
-                requiredMark="optional"
+        <Tabs defaultActiveKey="1" centered>
+          <TabPane key="1" tab="E-mail">
+            <Form
+              form={formRegisterContact}
+              name="formRegisterContact"
+              onFinish={sendContact}
+              scrollToFirstError
+              requiredMark="optional"
+              style={{ margin: '0px' }}
+              layout="vertical"
+            >
+              <Form.Item
+                name={'name'}
+                label="Nome"
                 style={{ margin: '0px' }}
-                layout="vertical"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Por favor, informe seu nome.'
+                  }
+                ]}
               >
-                <Form.Item
-                  name={'name'}
-                  label="Nome"
-                  style={{ margin: '0px' }}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Por favor, informe seu nome.'
-                    }
-                  ]}
+                <Input placeholder="Informe seu nome" />
+              </Form.Item>
+              <Form.Item
+                name={'email'}
+                label="E-mail"
+                style={{ margin: '0px' }}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Por favor, informe seu e-mail.'
+                  },
+                  {
+                    type: 'email',
+                    message: 'Por favor, insira um formato válido.'
+                  }
+                ]}
+              >
+                <Input placeholder="Informe seu e-mail" />
+              </Form.Item>
+              <Form.Item
+                name={'phone'}
+                label="WhatsApp/Telegram"
+                style={{ margin: '0px' }}
+              >
+                <MaskedInput mask={'(00) 0000-0000'} />
+              </Form.Item>
+              <Form.Item
+                name={'message'}
+                label="Mensagem"
+                style={{ margin: '0px' }}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Por favor, informe a mensagem.'
+                  }
+                ]}
+              >
+                <TextArea rows={4} placeholder="Informe a mensagem" />
+              </Form.Item>
+              <div style={{ textAlign: 'end' }}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  form="formRegisterContact"
+                  loading={sendEmailPromise}
                 >
-                  <Input placeholder="Informe seu nome" />
-                </Form.Item>
-                <Form.Item
-                  name={'email'}
-                  label="E-mail"
-                  style={{ margin: '0px' }}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Por favor, informe seu e-mail.'
-                    },
-                    {
-                      type: 'email',
-                      message: 'Por favor, insira um formato válido.'
-                    }
-                  ]}
-                >
-                  <Input placeholder="Informe seu e-mail" />
-                </Form.Item>
-                <Form.Item
-                  name={'phone'}
-                  label="WhatsApp/Telegram"
-                  style={{ margin: '0px' }}
-                >
-                  <MaskedInput mask={'(00) 0000-0000'} />
-                </Form.Item>
-                <Form.Item
-                  name={'message'}
-                  label="Mensagem"
-                  style={{ margin: '0px' }}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Por favor, informe a mensagem.'
-                    }
-                  ]}
-                >
-                  <TextArea rows={4} placeholder="Informe a mensagem" />
-                </Form.Item>
-                <div style={{ textAlign: 'end' }}>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    form="formRegisterContact"
-                    loading={sendEmailPromise}
-                  >
-                    Enviar
-                  </Button>
-                </div>
-              </Form>
-            </TabPane>
-            <TabPane key="2" tab="Redes sociais">
-              <RowToColumn>
-                <a
-                  href={`https://api.whatsapp.com/send?phone=${whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Card
-                    style={{ width: 300 }}
-                    cover={
-                      <WhatsAppOutlined
-                        style={{
-                          fontSize: '200px',
-                          color: '#25D366',
-                          marginTop: '20px'
-                        }}
-                      />
-                    }
-                  >
-                    <Meta
-                      title="WhatsApp"
+                  Enviar
+                </Button>
+              </div>
+            </Form>
+          </TabPane>
+          <TabPane key="2" tab="Redes sociais">
+            <RowToColumn>
+              <a
+                href={`https://api.whatsapp.com/send?phone=5583981516816`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Card
+                  style={{ width: 300 }}
+                  cover={
+                    <WhatsAppOutlined
                       style={{
-                        justifyContent: 'center',
-                        display: 'flex'
+                        fontSize: '200px',
+                        color: '#25D366',
+                        marginTop: '20px'
                       }}
                     />
-                  </Card>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/bruno-guedess/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  }
                 >
-                  <Card
-                    style={{ width: 300 }}
-                    cover={
-                      <LinkedinOutlined
-                        style={{
-                          fontSize: '200px',
-                          color: '#0a66c2',
-                          marginTop: '20px'
-                        }}
-                      />
-                    }
-                  >
-                    <Meta
-                      title="LinkedIn"
+                  <Meta
+                    title="WhatsApp"
+                    style={{
+                      justifyContent: 'center',
+                      display: 'flex'
+                    }}
+                  />
+                </Card>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/bruno-guedess/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Card
+                  style={{ width: 300 }}
+                  cover={
+                    <LinkedinOutlined
                       style={{
-                        justifyContent: 'center',
-                        display: 'flex'
+                        fontSize: '200px',
+                        color: '#0a66c2',
+                        marginTop: '20px'
                       }}
                     />
-                  </Card>
-                </a>
-                <a
-                  href="https://github.com/bruno489"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  }
                 >
-                  <Card
-                    style={{ width: 300 }}
-                    cover={
-                      <GithubOutlined
-                        style={{
-                          fontSize: '200px',
-                          marginTop: '20px'
-                        }}
-                      />
-                    }
-                  >
-                    <Meta
-                      title="GitHub"
+                  <Meta
+                    title="LinkedIn"
+                    style={{
+                      justifyContent: 'center',
+                      display: 'flex'
+                    }}
+                  />
+                </Card>
+              </a>
+              <a
+                href="https://github.com/bruno489"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Card
+                  style={{ width: 300 }}
+                  cover={
+                    <GithubOutlined
                       style={{
-                        justifyContent: 'center',
-                        display: 'flex'
+                        fontSize: '200px',
+                        marginTop: '20px'
                       }}
                     />
-                  </Card>
-                </a>
-              </RowToColumn>
-            </TabPane>
-          </Tabs>
-        </div>
-      </Content>
-      <FooterLanding>
-        <Text>Desenvolvido por Bruno Guedes</Text>
-      </FooterLanding>
-    </Layout>
+                  }
+                >
+                  <Meta
+                    title="GitHub"
+                    style={{
+                      justifyContent: 'center',
+                      display: 'flex'
+                    }}
+                  />
+                </Card>
+              </a>
+            </RowToColumn>
+          </TabPane>
+        </Tabs>
+      </div>
+    </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return { props: { whats: process.env.WHATSAPP_NUMBER } }
 }

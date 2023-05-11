@@ -10,9 +10,9 @@ color: white;
 padding: 0 15px;
 
 div > .menu{
-  width: 450px;
   height: 98%;
   justify-content: end;
+  flex: 1 1 auto;
 
   @media (max-width: 600px) {
     display:none;
