@@ -50,8 +50,6 @@ export const ConteudoDesk = (): JSX.Element => {
     area: 'submitEmail'
   })
 
-  console.log('props', process.env.WHATSAPP_NUMBER)
-
   const stacks: Stacks = {
     front: [
       'Javascript',
@@ -322,7 +320,7 @@ export const ConteudoDesk = (): JSX.Element => {
           <TabPane key="2" tab="Redes sociais">
             <RowToColumn>
               <a
-                href={`https://api.whatsapp.com/send?phone=5583981516816`}
+                href={`https://api.whatsapp.com/send?phone=${process.env.WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -404,8 +402,4 @@ export const ConteudoDesk = (): JSX.Element => {
       </div>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  return { props: { whats: process.env.WHATSAPP_NUMBER } }
 }
