@@ -93,7 +93,3 @@ export const LayoutGeral = ({ children }: Props): JSX.Element => {
     </Layout>
   )
 }
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  return { props: { whats: process.env.WHATSAPP_NUMBER } }
-}
