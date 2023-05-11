@@ -24,6 +24,7 @@ import {
   WhatsAppOutlined
 } from '@ant-design/icons'
 import { MaskedInput } from 'antd-mask-input'
+import Link from 'next/link'
 
 const { Content } = Layout
 const { Title, Text } = Typography
@@ -46,24 +47,29 @@ const { TabPane } = Tabs
 const { Meta } = Card
 const { TextArea } = Input
 
-export const ConteudoDesk = () => {
+interface Props {
+  whatsapp: string
+}
+
+export const ConteudoDesk = ({ whatsapp }: Props) => {
   const [formRegisterContact] = Form.useForm()
   const { promiseInProgress: sendEmailPromise } = usePromiseTracker({
     area: 'submitEmail'
   })
+
   const stacks: Stacks = {
     front: [
       'Javascript',
       'Typescript',
       'CSS3',
-      'NextJS',
+      'Next.Js',
       'Styled Components',
       'Ant Design',
       'Bootstrap',
       'HTML5',
       'Axios',
       'Git/GitHub',
-      'ReactJS'
+      'React.Js'
     ].sort(),
     back: [
       'NodeJS',
@@ -90,7 +96,7 @@ export const ConteudoDesk = () => {
         'Styled Components',
         'Node.Js',
         'Express',
-        'Axions'
+        'Axios'
       ]
     }
   ]
@@ -179,16 +185,20 @@ export const ConteudoDesk = () => {
             </div>
           </div>
           <div className="menu">
-            <Menu
-              mode="horizontal"
-              className="menu"
-              theme="dark"
-              items={[
-                { key: 1, label: 'Quem sou' },
-                { key: 2, label: 'Stack' },
-                { key: 3, label: 'Experiência' }
-              ]}
-            />
+            <Menu mode="horizontal" className="menu" theme="dark">
+              <Menu.Item key={1}>
+                <Link href="#quemSou">Quem sou</Link>
+              </Menu.Item>
+              <Menu.Item key={2}>
+                <Link href="#stack">Stack</Link>
+              </Menu.Item>
+              <Menu.Item key={3}>
+                <Link href="#experiencias">Experiências</Link>
+              </Menu.Item>
+              <Menu.Item key={4}>
+                <Link href="#experiencias">Contatos</Link>
+              </Menu.Item>
+            </Menu>
           </div>
         </div>
       </HeaderLanding>
@@ -198,6 +208,7 @@ export const ConteudoDesk = () => {
           justify="center"
           align="middle"
           style={{ padding: '10px auto', flex: '1' }}
+          id="quemSou"
         >
           <Col style={{ width: '30%' }}>
             <div style={{ height: '70vh', display: 'flex', margin: 'auto 0' }}>
@@ -213,10 +224,10 @@ export const ConteudoDesk = () => {
             <div>
               <p>
                 Olá, me chamo Bruno Guedes e sou desenvolvedor fullstack há mais
-                de um ano.
+                de um ano e meio.
               </p>
               <p>
-                Graduando em Direito, autodidata e paixonado pela programação
+                Graduando em Direito, autodidata e apaixonado pela programação
                 com o hábito de aprender todo dia.
               </p>
             </div>
@@ -264,7 +275,7 @@ export const ConteudoDesk = () => {
           </div>
         </div>
         <Divider>Experiências</Divider>
-        <div style={{ padding: '0 20px' }}>
+        <div style={{ padding: '0 20px' }} id="experiencias">
           {empresas.map((empresa, idx) => (
             <div
               key={idx}
@@ -303,7 +314,7 @@ export const ConteudoDesk = () => {
           ))}
         </div>
         <Divider>Contatos</Divider>
-        <div style={{ padding: '0 20px', marginBottom: '20px' }}>
+        <div style={{ padding: '0 20px', marginBottom: '20px' }} id="contatos">
           <Tabs defaultActiveKey="1" centered>
             <TabPane key="1" tab="E-mail">
               <Form
@@ -379,26 +390,32 @@ export const ConteudoDesk = () => {
             </TabPane>
             <TabPane key="2" tab="Redes sociais">
               <RowToColumn>
-                <Card
-                  style={{ width: 300 }}
-                  cover={
-                    <WhatsAppOutlined
+                <a
+                  href={`https://api.whatsapp.com/send?phone=${whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Card
+                    style={{ width: 300 }}
+                    cover={
+                      <WhatsAppOutlined
+                        style={{
+                          fontSize: '200px',
+                          color: '#25D366',
+                          marginTop: '20px'
+                        }}
+                      />
+                    }
+                  >
+                    <Meta
+                      title="WhatsApp"
                       style={{
-                        fontSize: '200px',
-                        color: '#25D366',
-                        marginTop: '20px'
+                        justifyContent: 'center',
+                        display: 'flex'
                       }}
                     />
-                  }
-                >
-                  <Meta
-                    title="WhatsApp"
-                    style={{
-                      justifyContent: 'center',
-                      display: 'flex'
-                    }}
-                  />
-                </Card>
+                  </Card>
+                </a>
                 <a
                   href="https://www.linkedin.com/in/bruno-guedess/"
                   target="_blank"
