@@ -22,7 +22,6 @@ import {
   WhatsAppOutlined
 } from '@ant-design/icons'
 import { MaskedInput } from 'antd-mask-input'
-import { GetServerSideProps } from 'next'
 
 const { Title } = Typography
 
