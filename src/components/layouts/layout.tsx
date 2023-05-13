@@ -2,7 +2,6 @@ import { Layout, Menu, Typography } from 'antd'
 import AvatarRosto from '../../../src/images/avatar_face.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import { GetServerSideProps } from 'next'
 import React from 'react'
 import { FooterLanding, HeaderLanding } from '../layout'
 
