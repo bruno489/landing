@@ -2,7 +2,6 @@ import { Layout, Menu, Typography } from 'antd'
 import AvatarRosto from '../../../src/images/avatar_face.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import { GetServerSideProps } from 'next'
 import React from 'react'
 import { FooterLanding, HeaderLanding } from '../layout'
 
@@ -64,22 +63,20 @@ export const LayoutGeral = ({ children }: Props): JSX.Element => {
               </Title>
             </div>
           </div>
-          <div className="menu">
-            <Menu mode="horizontal" className="menu" theme="dark">
-              <Menu.Item key={1}>
-                <Link href="#quemSou">Quem sou</Link>
-              </Menu.Item>
-              <Menu.Item key={2}>
-                <Link href="#stack">Stack</Link>
-              </Menu.Item>
-              <Menu.Item key={3}>
-                <Link href="#experiencias">Experiências</Link>
-              </Menu.Item>
-              <Menu.Item key={4}>
-                <Link href="#contatos">Contatos</Link>
-              </Menu.Item>
-            </Menu>
-          </div>
+          <Menu mode="horizontal" className="menu" theme="dark">
+            <Menu.Item key={1}>
+              <Link href="#quemSou">Quem sou</Link>
+            </Menu.Item>
+            <Menu.Item key={2}>
+              <Link href="#stack">Stack</Link>
+            </Menu.Item>
+            <Menu.Item key={3}>
+              <Link href="#experiencias">Experiências</Link>
+            </Menu.Item>
+            <Menu.Item key={4}>
+              <Link href="#contatos">Contatos</Link>
+            </Menu.Item>
+          </Menu>
         </div>
       </HeaderLanding>
       <Content style={{ maxWidth: '1400px', margin: '0 auto' }}>

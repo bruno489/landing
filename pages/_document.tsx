@@ -6,7 +6,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="pt-br">
         <Head>
-          <link rel="icon" href="../src/images/avatar_face.png" />
           <meta charSet="UTF-8" />
         </Head>
         <body>
