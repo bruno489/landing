@@ -13,7 +13,7 @@ div > .menu{
   height: 98%;
   justify-content: end;
   flex: 1 1 auto;
-
+  display: flex;
   @media (max-width: 600px) {
     display:none;
   }

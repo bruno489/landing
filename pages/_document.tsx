@@ -8,8 +8,6 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="icon" href="../src/images/avatar_face.png" />
           <meta charSet="UTF-8" />
-          <meta name="og:title" content={'Bruno Guedes'} />
-          <title>Bruno Guedes</title>
         </Head>
         <body>
           <Main />
